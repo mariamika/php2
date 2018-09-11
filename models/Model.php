@@ -2,10 +2,9 @@
 namespace app\models;
 use app\services\Db;
 
-class Model
+abstract class Model
 {
     protected $db;
-    protected $tableName;
 
     public function __construct()
     {
@@ -13,13 +12,16 @@ class Model
     }
 
     public function getOne($id){
-        $sql = "SELECT * FROM {$this->tableName} WHERE id = {$id}";
+        $tableName = $this->getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE id = {$id}";
         return $this->db->queryOne($sql);
     }
 
     public function getAll(){
-        $sql = "SELECT * FROM {$this->tableName}";
+        $tableName = $this->getTableName();
+        $sql = "SELECT * FROM {$tableName}";
         return $this->db->queryAll();
     }
 
+    abstract public function getTableName();
 }
