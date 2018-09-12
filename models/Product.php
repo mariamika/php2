@@ -9,7 +9,7 @@ class Product extends Model
     public $price;
     public $producer;
 
-    public function getTableName()
+    public function getTableName() : string
     {
         return 'products';
     }
