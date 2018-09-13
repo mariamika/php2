@@ -2,13 +2,12 @@
 namespace app\services;
 class Autoloader
 {
+    public $fileExtension = '.php';
+
     public function loadClass($className){
 
-        $app = $_SERVER['DOCUMENT_ROOT'] . '/DZ2';
-        $str = str_replace('app',$app,$className);
-        $str = str_replace('\\','/',$str);
-
-        $fileName = "{$str}.php";
+        $fileName = str_replace(["app\\","\\"],[ROOT_DIR,"/"],$className);
+        $fileName .= $this->fileExtension;
         if (file_exists($fileName)) {
             include $fileName;
         } else {
