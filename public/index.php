@@ -5,13 +5,9 @@ include ROOT_DIR . '/services/Autoloader.php';
 spl_autoload_register([new \app\services\Autoloader(),'loadClass']);
 
 $product = new app\models\Product();
-$order = new app\models\Order();
-$basket = new \app\models\Basket();
+$user = new \app\models\User();
 
-
-echo "Продукт: " . '<br>';
-var_dump($product);
-echo '<br><hr><br>Заказ:';
-var_dump($order);
-echo '<br><hr><br>Корзина:';
-var_dump($basket);
+var_dump($user->insert(['login'=>'maro',
+                        'password'=>'963',
+                        'name'=>'MARO',
+                        'last_name'=>'Mi']));

@@ -4,6 +4,7 @@ namespace app\models;
 
 class Basket extends Model
 {
+    public $id;
     public $amount;         // количество товара
     public $selectProduct;     // выбранные товары
     public $totalCost;      // общая стоимость всех выбранных товаров

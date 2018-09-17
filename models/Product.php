@@ -12,7 +12,7 @@ class Product extends Model
 
     public function getTableName() : string
     {
-        return 'products';
+        return 'product';
     }
 
     public function __construct()
