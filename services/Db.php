@@ -38,8 +38,7 @@ class Db
     }
 
     public function execute($sql,$params = []){
-        $this->query($sql, $params);
-        return true;
+        return $this->query($sql, $params);
     }
 
     private function query($sql, $params = []){

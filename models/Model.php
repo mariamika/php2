@@ -26,10 +26,15 @@ abstract class Model implements IModel
 
     public function insert($params = []){
         $tableName = $this->getTableName();
+        $arrKey = [];
+        $arrValue = [];
         foreach ($params as $key => $value){
-            $sql = "INSERT INTO {$tableName}({$key}) VALUES ({$value})";
-            return $this->db->insertData($sql);
+            $arrKey[] = $key;
+            $arrValue[] = $value;
         }
-
+        $Key = implode(', ', $arrKey);
+        $Value = implode(', ',$arrValue);
+        $sql = "INSERT INTO {$tableName} ({$Key}) VALUES ({$Value})";
+        return $this->db->insertData($sql);
     }
 }
