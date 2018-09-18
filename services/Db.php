@@ -18,12 +18,14 @@ class Db
     private $conn = null;
 
     private function getConnection(){
+
         if (is_null($this->conn)){
             $this->conn = new \PDO(
                 $this->prepareDsnString(),
                 $this->config['login'],
                 $this->config['password']
             );
+
             $this->conn->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         }
         return $this->conn;
@@ -33,22 +35,25 @@ class Db
         return $this->queryAll($sql, $params)[0];
     }
 
+    public function queryObject($sql, $params = [], $class){
+        $smtp = $this->query($sql,$params);
+        $smtp->setFetchMode(\PDO::FETCH_CLASS, $class);
+        return $smtp->fetch();
+    }
+
     public function queryAll($sql, $params = []){
         return $this->query($sql, $params)->fetchAll();
     }
 
     public function execute($sql,$params = []){
-        return $this->query($sql, $params);
+        $this->query($sql, $params);
+        return true;
     }
 
     private function query($sql, $params = []){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
         return $pdoStatement;
-    }
-
-    public function insertData($sql){
-        return $this->execute($sql);
     }
 
     private function prepareDsnString(){
@@ -59,4 +64,5 @@ class Db
             $this->config['charset']
         );
     }
+
 }

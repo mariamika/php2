@@ -6,8 +6,9 @@ spl_autoload_register([new \app\services\Autoloader(),'loadClass']);
 
 $product = new app\models\Product();
 $user = new \app\models\User();
-
-var_dump($user->insert(['login'=>'maro',
-                        'password'=>'963',
-                        'name'=>'MARO',
-                        'last_name'=>'Mi']));
+echo "<pre>";
+//var_dump($product->getAll());
+var_dump($product->getOne(4));
+//var_dump($user->insert(['login'=>'alex', 'password'=>'654963', 'name'=>'Sasha', 'last_name'=>'Tim']));
+//var_dump($user->update(8,['name'=>'maro','last_name'=>'Mi']));
+//var_dump($user->delete(['id'=>'9']));

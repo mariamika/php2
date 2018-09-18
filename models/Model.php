@@ -15,7 +15,7 @@ abstract class Model implements IModel
     public function getOne(int $id) {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
-        return $this->db->queryOne($sql, [':id' => $id]);
+        return $this->db->queryObject($sql, [':id' => $id], get_called_class());
     }
 
     public function getAll() : array {
@@ -33,8 +33,30 @@ abstract class Model implements IModel
             $arrValue[] = $value;
         }
         $Key = implode(', ', $arrKey);
-        $Value = implode(', ',$arrValue);
-        $sql = "INSERT INTO {$tableName} ({$Key}) VALUES ({$Value})";
-        return $this->db->insertData($sql);
+        $Value = implode('\', \'',$arrValue);
+        $sql = "INSERT INTO {$tableName} ({$Key}) VALUES ('{$Value}')";
+        return $this->db->execute($sql);
     }
+
+    public function update($id,$params = []){
+        $tableName = $this->getTableName();
+        $sql = "UPDATE {$tableName} SET ";
+        foreach ($params as $key => $value){
+                $sql .= "{$key} = '{$value}', ";
+        }
+        $sql = substr_replace($sql," ",strlen($sql)-2,-1);
+        $sql .= "WHERE id = {$id}";
+        return $this->db->execute($sql);
+    }
+
+    public function delete($params = []){
+        $tableName = $this->getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE ";
+        foreach ($params as $key => $value){
+            $sql .= "{$key} = {$value}";
+        }
+        return $this->db->execute($sql);
+    }
+
+
 }

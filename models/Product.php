@@ -10,13 +10,14 @@ class Product extends Model
     public $producer;
     public $categoryProduct;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->categoryProduct = new Category();
+    }
+
     public function getTableName() : string
     {
         return 'product';
-    }
-
-    public function __construct()
-    {
-        $this->categoryProduct = new Category();
     }
 }
