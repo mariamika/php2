@@ -21,7 +21,7 @@ abstract class Model implements IModel
     public function getAll() : array {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryAll($sql);
+        return $this->db->queryObjectAll($sql, [], get_called_class());
     }
 
     public function insert($params = []){
