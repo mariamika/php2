@@ -37,7 +37,7 @@ class Db
 
     public function queryObject($sql, $params = [], $class){
         $smtp = $this->query($sql,$params);
-        $smtp->setFetchMode(\PDO::FETCH_CLASS, $class);
+        $smtp->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
         return $smtp->fetch();
     }
 
