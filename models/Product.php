@@ -16,7 +16,7 @@ class Product extends Model
         $this->categoryProduct = new Category();
     }
 
-    public function getTableName() : string
+    public static function getTableName()
     {
         return 'product';
     }

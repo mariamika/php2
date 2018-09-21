@@ -71,4 +71,8 @@ class Db
         );
     }
 
+    public function lastInsertId(){
+        return $this->getConnection()->lastInsertId();
+    }
+
 }

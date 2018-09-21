@@ -9,7 +9,7 @@ class Basket extends Model
     public $selectProduct;     // выбранные товары
     public $totalCost;      // общая стоимость всех выбранных товаров
 
-    public function getTableName() : string
+    public static function getTableName()
     {
         return 'basket';
     }

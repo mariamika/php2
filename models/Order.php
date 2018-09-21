@@ -18,7 +18,7 @@ class Order extends Model
         $this->allSelectProduct = new Basket();
     }
 
-    public function getTableName() : string
+    public static function getTableName()
     {
         return 'orders';
     }
