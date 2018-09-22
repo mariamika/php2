@@ -1,0 +1,12 @@
+{
+    "name": "maro/pandora",
+    "authors": [
+        {
+            "name": "Maria Mishina",
+            "email": "joolveg@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.0"
+    }
+}
