@@ -12,7 +12,7 @@ abstract class DbModel implements IDbModel
      */
     public function __construct()
     {
-        $this->db = Db::getInstance();
+        $this->db = static::getDb();
     }
 
     /**
@@ -22,7 +22,7 @@ abstract class DbModel implements IDbModel
     public static function getOne($id) {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
-        return Db::getInstance()->queryObject($sql, [':id' => $id], get_called_class());
+        return static::getDb()->queryObject($sql, [':id' => $id], get_called_class());
     }
 
     /**
@@ -31,7 +31,11 @@ abstract class DbModel implements IDbModel
     public static function getAll() {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return Db::getInstance()->queryObjectAll($sql, [], get_called_class());
+        return static::getDb()->queryObjectAll($sql, [], get_called_class());
+    }
+
+    private static function getDb(){
+        return Db::getInstance();
     }
 
     public function insert(){
