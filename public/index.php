@@ -1,11 +1,15 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/DZ2/config/main.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Pandora/config/main.php';
 include ROOT_DIR . '/services/Autoloader.php';
 
 spl_autoload_register([new \app\services\Autoloader(),'loadClass']);
 
-$user = \app\models\User::getOne(9);
-$user->last_name = 'Petrushkin';
-$user->name = 'Oves';
+$controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
+$action = $_GET['a'];
 
-$user->update();
+$controllerClass = CONTROLLERS_NAMESPACE . '\\' . ucfirst($controllerName) . 'Controller';
+
+if (class_exists($controllerClass)){
+    $controller = new $controllerClass;
+    $controller->run($action);
+}

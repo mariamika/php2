@@ -1,7 +1,7 @@
 <?php
 namespace app\models;
 
-class Product extends Model
+class Product extends DbModel
 {
     public $id;
     public $name;

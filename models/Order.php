@@ -3,7 +3,7 @@ namespace app\models;
 
 
 
-class Order extends Model
+class Order extends DbModel
 {
     protected $allSelectProduct;
     public $delivery;       // способ доставки
