@@ -1,9 +1,12 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Pandora/config/main.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/../config/main.php';
 include VENDOR_DIR . 'autoload.php';
 
-$controllerName = $_GET['c'] ?: DEFAULT_CONTROLLER;
-$action = $_GET['a'];
+
+$request = new \app\services\Request();
+
+$controllerName = $request->getControllerName() ?: DEFAULT_CONTROLLER;
+$action = $request->getActionName();
 
 $controllerClass = CONTROLLERS_NAMESPACE . '\\' . ucfirst($controllerName) . 'Controller';
 

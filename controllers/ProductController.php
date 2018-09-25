@@ -14,7 +14,22 @@ class ProductController extends Controller
     public function actionCard(){
         //$this->useLayout = false;
         $id = $_GET['id'];
-        $product = Product::getOne($id);
+
+        try {
+            $product = Product::getOne($id);
+        } catch (\PDOException $e){
+            echo 'ошибка базы';
+            exit;
+        } catch (\Exception $e){
+            echo 'Произошла ошибка!!!';
+            exit;
+        } finally {
+            
+        }
+
+        if (!$product){
+            throw new \Exception('Продукт не найден!!!');
+        }
         echo $this->render('card',['product' => $product]);
     }
 }
