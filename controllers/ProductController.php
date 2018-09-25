@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 use app\models\Product;
+use app\models\User;
 
 class ProductController extends Controller
 {

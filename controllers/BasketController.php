@@ -11,7 +11,4 @@ class BasketController extends Controller
         $product = Basket::getBasket();
         echo $this->render('basket',['product' => $product]);
     }
-
-
-
 }

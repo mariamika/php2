@@ -38,12 +38,20 @@ abstract class DbModel implements IDbModel
         return Db::getInstance();
     }
 
+    public function save(){
+        if (!is_null($this->id)){
+            $this->update();
+        } else {
+            $this->insert();
+        }
+
+    }
+
     public function insert(){
         $params = [];
         $columns = [];
         foreach ($this as $key => $value){
-
-            if ($key == 'db'){
+            if (is_object($value)){
                 continue;
             }
             if (is_null($value)){$value = '';}
@@ -63,7 +71,7 @@ abstract class DbModel implements IDbModel
         $tableName = static::getTableName();
         $sql = "UPDATE {$tableName} SET ";
         foreach ($this as $key => $value){
-            if ($key == 'db'){continue;}
+            if (is_object($value)){continue;}
             if ($value != $oldObject->{$key}){
                 $params[":{$key}"] = "$value";
                 $sql .= "{$key} = :{$key}, ";
