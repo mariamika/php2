@@ -1,34 +1,25 @@
 <?php
 namespace app\controllers;
-use app\models\Product;
-use app\models\User;
+use app\base\App;
+use app\models\repositories\ProductRepository;
 
 class ProductController extends Controller
 {
     public function actionIndex(){
-        //$this->>useLayout = false;
-        $product = Product::getAll();
+        $product = (new ProductRepository())->getAll();
+
+        if (!$product){
+            throw new \Exception('Данные каталога из базы не получены!');
+        }
         echo $this->render('catalog',['product' => $product]);
     }
 
     public function actionCard(){
-        //$this->useLayout = false;
-        $id = $_GET['id'];
-
-        try {
-            $product = Product::getOne($id);
-        } catch (\PDOException $e){
-            echo 'ошибка базы';
-            exit;
-        } catch (\Exception $e){
-            echo 'Произошла ошибка!!!';
-            exit;
-        } finally {
-            
-        }
+        $id = App::call()->renderer->getParams('id');
+        $product = (new ProductRepository())->getOne($id);
 
         if (!$product){
-            throw new \Exception('Продукт не найден!!!');
+            throw new \Exception('Продукт не найден!');
         }
         echo $this->render('card',['product' => $product]);
     }

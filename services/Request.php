@@ -8,6 +8,7 @@ class Request
     private $actionName;
     private $params;
     private $requestString;
+    private $requestMethod;
 
     /**
      * Request constructor.
@@ -15,9 +16,9 @@ class Request
     public function __construct()
     {
         $this->requestString = $_SERVER['REQUEST_URI'];
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
         $this->parseRequest();
     }
-
 
     private function parseRequest(){
         $pattern = "#(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui";

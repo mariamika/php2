@@ -1,14 +1,16 @@
 <?php
-
 namespace app\controllers;
-
-
-use app\models\Basket;
+use app\models\repositories\BasketRepository;
 
 class BasketController extends Controller
 {
     public function actionIndex(){
-        $product = Basket::getBasket();
-        echo $this->render('basket',['product' => $product]);
+        $basket = (new BasketRepository())->getBasket();
+        if (!$basket){
+            throw new \Exception('Данные корзины из базы не получены!');
+        }
+        echo $this->render('basket',['product' => $basket]);
     }
+
+
 }

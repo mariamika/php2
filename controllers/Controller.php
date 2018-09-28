@@ -1,11 +1,7 @@
 <?php
 
 namespace app\controllers;
-
-
 use app\interfaces\IRenderer;
-use app\services\TemplateRenderer;
-use app\services\TwigRenderer;
 
 abstract class Controller
 {

@@ -1,11 +1,10 @@
-    <form action="?c=basket" method="post">
+    <form action="/basket" method="post">
         <div style="margin: 50px; display: block; width: 460px; margin-right: 600px;">
             <span style="font-family: 'Open Sans', sans-serif; font-size: 18px; margin-top: 20px;"><?=$product->name?></span><br><br>
             <p><?=$product->description?></p><br>
             <span style="font-family: 'Open Sans', sans-serif; font-size: 16px">&#36; <?=$product->price?></span>
 
             <select name="amount" style="float: right;">
-                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

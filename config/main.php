@@ -1,7 +1,26 @@
 <?php
-define('DS',DIRECTORY_SEPARATOR);
-define('ROOT_DIR',$_SERVER['DOCUMENT_ROOT']);
-define('TEMPLATES_DIR',ROOT_DIR . '/../views/');
-define("VENDOR_DIR", ROOT_DIR . '/../vendor/');
-define('DEFAULT_CONTROLLER','product');
-define('CONTROLLERS_NAMESPACE','app\controllers');
+return [
+    'DS' => DIRECTORY_SEPARATOR,
+    'rootDir' => __DIR__ . '/../',
+    'templatesDir' => __DIR__ . '/../views/',
+    'vendorDir' => __DIR__ . '/../vendor/',
+    'defaultController' => 'product',
+    'controllerNamespace' => 'app\controllers',
+    'components' => [
+        'db' => [
+            'class' => \app\services\Db::class,
+            'driver' => 'mysql',
+            'host' => 'localhost',
+            'login' => 'root',
+            'password' => '',
+            'database' => 'store',
+            'charset' => 'utf8'
+        ],
+        'request' => [
+            'class' => \app\services\Request::class
+        ],
+        'templateRenderer' => [
+            'class' => \app\services\TemplateRenderer::class
+        ]
+    ]
+];
