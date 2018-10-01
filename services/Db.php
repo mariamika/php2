@@ -10,7 +10,7 @@ class Db
     /**
      * Db constructor.
      */
-    public function __construct($driver,$host,$login,$password,$database,$charset)
+    public function __construct($driver,$host,$login,$password,$database,$charset = 'utf8')
     {
         $this->config['driver'] = $driver;
         $this->config['host'] = $host;
@@ -43,14 +43,14 @@ class Db
     public function queryObject($sql, $params = [], $class){
         $smtp = $this->query($sql,$params);
         $smtp->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
-        return $smtp->fetch();
+        return $smtp->fetchAll();
     }
 
-    public function queryObjectAll($sql, $params = [], $class){
+    /*public function queryObjectAll($sql, $params = [], $class){
         $smtp = $this->query($sql,$params);
         $smtp->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
         return $smtp->fetchAll();
-    }
+    }*/
 
     public function queryAll($sql, $params = []){
         return $this->query($sql, $params)->fetchAll();

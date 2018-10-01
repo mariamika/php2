@@ -1,12 +1,19 @@
 <?php
 namespace app\models\repositories;
 use app\base\App;
+use app\models\Db;
 use app\models\entities\DataEntity;
 
+class RepositoryException extends \Exception{}
 abstract class Repository
 {
+    /** @var Db */
     protected $db;
 
+    /**
+     * Repository constructor.
+     * @param $db
+     */
     public function __construct()
     {
         $this->db = App::call()->db;
@@ -19,13 +26,13 @@ abstract class Repository
     public function getOne($id) {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE id = :id";
-        return $this->db->queryObject($sql, [':id' => $id], $this->getEntityClass());
+        return $this->find($sql, [':id' => $id])[0];
     }
 
     public function getAll() {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName}";
-        return $this->db->queryObjectAll($sql, [], $this->getEntityClass());
+        return $this->find($sql, []);
     }
 
     public function save(DataEntity $entity){
@@ -34,6 +41,11 @@ abstract class Repository
         } else {
             $this->insert($entity);
         }
+    }
+
+    public function find($sql, $params)
+    {
+        return $this->db->queryObject($sql, $params, $this->getEntityClass());
     }
 
     public function insert(DataEntity $entity){

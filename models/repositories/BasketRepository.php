@@ -19,8 +19,7 @@ class BasketRepository extends Repository
                 inner join product p on b.id_product = p.id
                 inner join category c on p.id_category = c.id
                 where b.id_user = 2;";
-        echo '<pre>';
-        return $this->db->queryObjectAll($sql, [], $this->getEntityClass());
+        return $this->db->queryObject($sql, [], $this->getEntityClass());
     }
 
 

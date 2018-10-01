@@ -15,7 +15,7 @@ class ProductController extends Controller
     }
 
     public function actionCard(){
-        $id = App::call()->renderer->getParams('id');
+        $id = App::call()->request->getParams('id');
         $product = (new ProductRepository())->getOne($id);
 
         if (!$product){

@@ -48,11 +48,27 @@ class Request
     /**
      * @return mixed
      */
-    public function getParams()
+    public function getParams($name = null)
     {
+        if ($name){
+            return $this->params[$name];
+        }
         return $this->params;
     }
 
+    public function getRequestMethod()
+    {
+        return $this->requestMethod;
+    }
 
+    public function isGet()
+    {
+        return $this->requestMethod == "GET";
+    }
+
+    public function isPost()
+    {
+        return $this->requestMethod == "POST";
+    }
 
 }
