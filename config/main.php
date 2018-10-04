@@ -21,6 +21,9 @@ return [
         ],
         'templateRenderer' => [
             'class' => \app\services\TemplateRenderer::class
+        ],
+        'session' => [
+            'class' => \app\services\Session::class
         ]
     ]
 ];

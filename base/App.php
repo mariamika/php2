@@ -42,7 +42,7 @@ class App
             $controller = new $controllerClass($this->templateRenderer);
             $controller->run($action);
         } else {
-            echo "404!!!";
+            echo($this->templateRenderer->render('404',[],NULL));
         }
     }
 

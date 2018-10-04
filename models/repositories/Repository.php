@@ -1,10 +1,8 @@
 <?php
 namespace app\models\repositories;
 use app\base\App;
-use app\models\Db;
 use app\models\entities\DataEntity;
 
-class RepositoryException extends \Exception{}
 abstract class Repository
 {
     /** @var Db */
@@ -68,7 +66,6 @@ abstract class Repository
 
     public function update(DataEntity $entity){
         $oldObject = $this->getOne($entity->id);
-        //echo '<pre>'; var_dump($oldObject); exit;
         $tableName = $this->getTableName();
         $sql = "UPDATE {$tableName} SET ";
         foreach ($entity as $key => $value){

@@ -7,7 +7,6 @@ class ProductController extends Controller
 {
     public function actionIndex(){
         $product = (new ProductRepository())->getAll();
-
         if (!$product){
             throw new \Exception('Данные каталога из базы не получены!');
         }

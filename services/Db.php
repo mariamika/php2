@@ -46,12 +46,6 @@ class Db
         return $smtp->fetchAll();
     }
 
-    /*public function queryObjectAll($sql, $params = [], $class){
-        $smtp = $this->query($sql,$params);
-        $smtp->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
-        return $smtp->fetchAll();
-    }*/
-
     public function queryAll($sql, $params = []){
         return $this->query($sql, $params)->fetchAll();
     }
